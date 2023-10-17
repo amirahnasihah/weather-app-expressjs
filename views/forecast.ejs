@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Weather Info</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheet/style.css">
+  </head>
+
+  <body>
+    <div class="weather-block">
+      <h1>Today's weather info</h1>
+
+
+      <button onclick="document.location='/'" type="button" title="Get weather">Search again</button>
+      <div class="main-block">
+        <div class="first-block">
+          <% const geo=geocodeData.results[0] %>
+            <h1>
+              <%=geo.components.city %>,
+                <%=geo.components.state %>,
+                  <%=geo.components.country %>
+            </h1>
+            <hr />
+            <div class="coordinates">
+              <% const { latitude, longitude }=weatherData %>
+                <p class="text">Latitude: <%=latitude %> | Longitude <%=longitude %>
+                </p>
+            </div>
+        </div>
+        <div class="second-block">
+          <% const { current, current_units }=weatherData %>
+            <div class="text">
+              <p>Temperature: <%=current.temperature_2m+current_units.temperature_2m %>
+              </p>
+              <p>Wind Speed: <%=current.windspeed_10m+current_units.windspeed_10m %>
+              </p>
+              <p>Wind Direction: <%=current.winddirection_10m+current_units.winddirection_10m %>
+              </p>
+            </div>
+        </div>
+        <div class="third-block">
+          <% const { hourly, hourly_units }=weatherData %>
+            <% hourly.time.slice().map((forecastTime, index)=> {
+              %> <% const localTime=new Date(forecastTime).toLocaleTimeString() %>
+                <% const temperature=hourly.temperature_2m[index] %>
+                  <div class="scroll-forecast">
+                    <p>
+                      <%=localTime %>
+                    </p>
+                    <p>
+                      <%=temperature+hourly_units.temperature_2m %>
+                    </p>
+                  </div>
+                  <% } ) %>
+        </div>
+      </div>
+      <footer class="footer">expressjs weather app (amirahnasihah, talentlabs)</footer>
+    </div>
+    <script src="" async defer></script>
+  </body>
+
+</html>
