@@ -1,3 +1,7 @@
+### Deploy
+
+☁️ deploy to render: https://weather-app-expressjs-aora.onrender.com
+
 # What to install?
 
 > express, ejs, dotenv, axios, nodemon
